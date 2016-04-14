@@ -1,0 +1,27 @@
+{
+  "name": "jekyll-preview",
+  "bin": "bin/jekyll-preview",
+  "repository": "github:mklabs/jekyll-preview",
+  "license": "WTFPL",
+  "scripts": {
+    "test": "mocha && npm run lint",
+    "lint": "eslint . && jscs ."
+  },
+  "devDependencies": {
+    "eslint": "^2.7.0",
+    "jscs": "^2.11.0",
+    "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "finalhandler": "^0.4.1",
+    "js-yaml": "^3.5.5",
+    "liquid-node": "^2.6.1",
+    "log-symbols": "^1.0.2",
+    "markdown-it": "^6.0.1",
+    "minimist": "^1.2.0",
+    "serve-index": "^1.7.3",
+    "serve-static": "^1.10.2",
+    "yaml-front-matter": "^3.4.0"
+  }
+}

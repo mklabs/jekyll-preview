@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+process.env.DEBUG = process.env.DEBUG || 'jekyll*';
+
+var fs = require('fs');
+var path = require('path');
+var stat = fs.statSync;
+var exists = require('fs').existsSync;
+var chalk = require('chalk');
+var symbols = require('log-symbols');
+var debug = require('debug')('jekyll');
+var opts = require('minimist')(process.argv.slice(2), {
+  alias: {
+    h: 'help'
+  }
+});
+
+var file = opts._[0] || './';
+if (!exists(file)) return f('%s does not exist', file);
+if (opts.help) return help();
+
+var ext = path.extname(file);
+file = path.resolve(file);
+basedir = ext ? path.dirname(file) : file;
+
+if (!stat(file).isDirectory()) return f('%s is not a directory', basedir);
+if (!check('_posts')) return f('Jekyll post folder does not exist');
+if (!check('_layouts')) return f('Jekyll layout folder does not exist');
+
+var port = opts.port || 4567;
+require('../server')(basedir, port, function(err) {
+  if (err) throw err;
+  debug('Listening on http://localhost:%d serving %s', port, basedir);
+});
+
+function f(msg) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  msg = '\n ' + symbols.error + ' ' + chalk.red(msg);
+  console.error.apply(console, [msg].concat(args));
+  process.exit(1);
+}
+
+function check(file) {
+  return exists(path.join(basedir, file));
+}
+
+function help(file) {
+  return console.log(`
+  Usage
+    jekyll-preview <dir> [options]
+
+  Options
+    --port  Server port [Default: 4567]
+
+  Examples
+
+    $ jekyll-preview
+
+    $ jekyll-preview ./path/to/jekyll_dir
+`);
+}
