@@ -1,5 +1,6 @@
 {
   "name": "jekyll-preview",
+  "version": "1.0.0",
   "bin": "bin/jekyll-preview",
   "repository": "github:mklabs/jekyll-preview",
   "license": "WTFPL",
@@ -23,5 +24,7 @@
     "serve-index": "^1.7.3",
     "serve-static": "^1.10.2",
     "yaml-front-matter": "^3.4.0"
-  }
+  },
+
+  "keywords": ["jekyll", "blog", "tool"]
 }
