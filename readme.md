@@ -14,6 +14,10 @@ responding with what would generate Jekyll (or close enough).
 - Layout chaining support
 - Quick, simple and node
 
+**Caveats** 
+
+- Currently doesn't handle includes at all. Needs further work and / or patch to [liquid-node](https://www.npmjs.com/package/liquid-node)
+
 ## Install
 
 ```
